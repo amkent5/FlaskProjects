@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset=utf-8 />
+		<title>Spelling Rockstars!</title>
+
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+		
+		<style>
+			body,h1 {font-family: "Raleway", sans-serif}
+			body, html {height: 100%}
+			.bgimg {
+			    background-image: url('http://blog.codemasters.com/wp-content/uploads/2014/05/Locations_feat.jpg');
+			    min-height: 100%;
+			    background-position: center;
+			    background-size: cover;
+			}
+		</style>
+
+		<style>
+	        ul {
+	            list-style-type: none;
+	            margin: 0;
+	            padding: 0;
+	            overflow: hidden;
+	            background-color: #333;
+	        }
+
+	        li {
+	            float: left;
+	            border-right:1px solid #bbb;
+	        }
+
+	        li:last-child {
+	            border-right: none;
+	        }
+
+	        li a {
+	            display: block;
+	            color: white;
+	            text-align: center;
+	            padding: 14px 16px;
+	            text-decoration: none;
+	        }
+
+	        li a:hover:not(.active) {
+	            background-color: #111;
+	        }
+
+	        .active {
+	            background-color: #4CAF50;
+	        }
+	    </style>
+
+	</head>
+	
+	<body class="bgimg">
+
+		<ul>
+			<li><a class="active" href="#home">Home</a></li>
+			<li><a href="{{ url_for('race') }}">Race!</a></li>
+			<li><a href="{{ url_for('racingstats') }}">My Racing Stats</a></li>
+			<li><a href="#leaderboards">Leader Boards</a></li>
+			<li style="float:right"><a href="#logout">Log Out</a></li>
+		</ul>
+
+
+		<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+
+			<div class="w3-display-middle" >
+			    <h1 class="w3-jumbo w3-animate-top">MPH Spelling</h1>
+			    <hr class="w3-border-grey" style="margin:auto;width:40%">
+			    <p class="w3-large w3-center">Accelerate your spelling</p>
+			</div>
+
+		</div>
+	  
+	</body>
+	  
+</html>

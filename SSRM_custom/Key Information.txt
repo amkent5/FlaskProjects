@@ -1,0 +1,38 @@
+Working on course slides in:
+https://onedrive.live.com/?authkey=%21ABwJkIyxNM-7qiw&cid=9F51D5D15B58BE4C&id=9F51D5D15B58BE4C%217893&parId=9F51D5D15B58BE4C%215833&o=OneUp
+
+The course code has been cloned down from github into the Flask dir.
+
+On Slide:
+34
+(remember to order by name)
+
+Database:
+Have a Postgres server running locally on mac.
+To start it up go to Applications and double click on Postgres.
+Then in the Admin server (double click on admin to get the cmd line interface),
+you can see I have created the users table etc..
+
+Flask-SQLAlchemy:
+You need to pip install the flask extension so that flask can talk to the db :)
+
+Flask-WTF:
+This is the pip install Flask extension that is used to build the Forms
+
+
+
+
+--------------
+Creating a sproc that outputs JSON in postgresql
+
+
+Example how to call a sproc in python from postgresql:
+http://www.postgresqltutorial.com/postgresql-python/call-stored-procedures/
+
+
+Use the sproc in postgresql called "users_json".
+We can call it like this in psql:
+select users_json()
+
+Code behind it:
+create or replace function users_json() returns table(row_to_json json) as $$ begin return query select row_to_json(t) from (select * from users) t; end; $$ language plpgsql;

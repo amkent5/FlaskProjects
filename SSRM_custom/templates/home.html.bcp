@@ -1,0 +1,139 @@
+{% extends "layout.html" %}
+
+<!--
+
+In this version of the home template try out this pagination:
+https://datatables.net/examples/styling/bootstrap.html
+
+This is the one!
+
+-->
+
+{% block content %}
+	<main class="hero-section">
+
+		<head>
+			<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+			<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
+		</head>
+
+		<div class="container">
+			<h2>Welcome</h2>
+			<p>To begin, select source:</p>
+		</div>
+		<div class="container">
+
+			<form method="POST" action="/home">
+				<select class="btn-danger" name="btn_select_data">
+					<option value="show_users">Users</option>
+					<option value="show_jobs">Jobs</option>
+					<option value="show_appointments">Appointments</option>
+					{% if val == 'show_costs' %}
+						<option selected value="show_costs">Costs</option>
+					{% else %}
+						<option value="show_costs">Costs</option>
+					{% endif %}
+				</select>
+				<input type="submit">
+				<br><br>
+				<br><br>
+			</form>
+
+		</div>
+
+		<!-- Show the users table here if {{ val }} == 'show_users' -->
+		{% if val == 'show_users' %}
+			<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+			<div class="container">
+				<table class="w3-table-all">
+					<thead>
+						<tr>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Email</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for d in dict_data %}
+							<tr>
+								<td>{{ d['firstname'] }}</td>
+								<td>{{ d['lastname'] }}</td>
+								<td>{{ d['email'] }}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+
+			<!-- hide table -->
+			<div class="container">
+
+				<form method="POST" action="/home">
+					<button class="btn-danger" type="submit" name="btn_select_data" value="hide">
+						Hide
+					</button>
+				</form>
+
+			</div>
+		{% endif %}
+
+		{% if val == 'show_jobs' %}
+		{% endif %}
+
+		{% if val == 'show_appointments' %}
+		{% endif %}
+
+		{% if val == 'show_costs' %}
+			<!--<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">-->
+			<div class="container">
+			<!--<div>-->
+				<!--<table class="w3-table-all">-->
+				<table id="table-demo" class="table table-striped table-bordered" cellspacing="0" width="100%">
+					<thead>
+						<tr>
+							<th>Job Cost ID</th>
+							<th>Job ID</th>
+							<th>Cost Type</th>
+							<th>Job Cost Resource</th>
+							<th>Job Cost Supplier</th>
+							<th>Unit Costs</th>
+							<th>Unit Sales</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for d in dict_data %}
+							<tr>
+								<td>{{ d['job_cost_id'] }}</td>
+								<td>{{ d['job_id'] }}</td>
+								<td>{{ d['cost_type'] }}</td>
+								<td>{{ d['job_cost_resource'] }}</td>
+								<td>{{ d['job_cost_supplier'] }}</td>
+								<td>{{ d['unit_cost'] }}</td>
+								<td>{{ d['unit_sales'] }}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+				
+				<script type="text/javascript" src="//code.jquery.com/jquery-1.12.4.js"></script>
+				<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+				<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+				<script type="text/javascript">
+		            $(document).ready(function() {
+					    $('#table-demo').DataTable();
+					} );
+		        </script>
+			</div>
+
+			<!-- hide table -->
+			<div class="container">
+				<form method="POST" action="/home">
+					<button class="btn-danger" type="submit" name="btn_select_data" value="hide">
+						Hide
+					</button>
+				</form>
+			</div>
+		{% endif %}
+
+	</main>
+{% endblock %}

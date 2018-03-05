@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset=utf-8 />
+		<title>Spelling Rockstars!</title>
+
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+		
+		<style>
+			body,h1 {font-family: "Raleway", sans-serif}
+			body, html {height: 100%}
+			.bgimg {
+			    background-image: url('http://marystreetdental.com.au/wp-content/uploads/2014/09/Dark-Grey-background.jpg');
+			    min-height: 100%;
+			    background-position: center;
+			    background-size: cover;
+			}
+		</style>
+
+		<style>
+	        ul {
+	            list-style-type: none;
+	            margin: 0;
+	            padding: 0;
+	            overflow: hidden;
+	            background-color: #333;
+	        }
+
+	        li {
+	            float: left;
+	            border-right:1px solid #bbb;
+	        }
+
+	        li:last-child {
+	            border-right: none;
+	        }
+
+	        li a {
+	            display: block;
+	            color: white;
+	            text-align: center;
+	            padding: 14px 16px;
+	            text-decoration: none;
+	        }
+
+	        li a:hover:not(.active) {
+	            background-color: #111;
+	        }
+
+	        .active {
+	            background-color: #4CAF50;
+	        }
+	    </style>
+	</head>
+	
+
+
+
+
+	<body class="bgimg">
+
+		<ul>
+			<li><a href="{{ url_for('home') }}" href="#home">Home</a></li>
+			<li><a href="{{ url_for('race') }}">Race!</a></li>
+			<li><a class="active" href="#racingstats">My Racing Stats</a></li>
+			<li><a href="#leaderboards">Leader Boards</a></li>
+			<li style="float:right"><a href="#logout">Log Out</a></li>
+		</ul>
+
+		<div id="container123" style="width:500px;height:500px;"></div>
+		
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script>window.jQuery || document.write('<script src="js/jquery-1.8.3.min.js"><\/script>')</script>
+		<script src="http://code.highcharts.com/highcharts.js"></script>
+		<script src="http://code.highcharts.com/highcharts-more.js"></script>
+		<script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+		<script>
+		     //My highchart script
+
+		     $(function () {
+		        var chart;
+		        $(document).ready(function() {
+		            // $.getJSON("data.php", function(json) {
+
+		                chart = new Highcharts.Chart({
+		                    chart: {
+		                        renderTo: 'container123',
+		                        type: 'line',
+		                        marginRight: 130,
+		                        marginBottom: 25
+		                    },
+		                    title: {
+		                        text: 'Disease',
+		                        x: -20 //center
+		                    },
+		                    subtitle: {
+		                        text: '',
+		                        x: -20
+		                    },
+		                    xAxis: {
+		                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+		                    },
+		                    yAxis: {
+		                        title: {
+		                            text: 'Patient Count'
+		                        },
+		                        plotLines: [{
+		                            value: 0,
+		                            width: 1,
+		                            color: '#808080'
+		                        }]
+		                    },
+		                    tooltip: {
+		                        formatter: function() {
+		                                return '<b>'+ this.series.name +'</b><br/>'+
+		                                this.x +': '+ this.y;
+		                        }
+		                    },
+		                    legend: {
+		                        layout: 'vertical',
+		                        align: 'right',
+		                        verticalAlign: 'top',
+		                        x: -10,
+		                        y: 100,
+		                        borderWidth: 0
+		                    },
+		                    series: [{
+		                        name: 'Jane',
+		                        data: [1, 0, 4]
+		                    }, {
+		                        name: 'John',
+		                        data: [5, 7, 3]
+		                    }]
+		                });
+		        //  });
+
+		        });
+
+		     });
+
+		</script>
+
+
+
+
+	  
+	</body>
+	  
+</html>

@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset=utf-8 />
+		<title>Spelling Rockstars!</title>
+
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+		<style>
+		body,h1 {font-family: "Raleway", sans-serif}
+		body, html {height: 100%}
+		.bgimg {
+		    background-image: url('https://ips.pepitastore.com/storefront/img/resized/codemastersv3/8_086810aad7d45e04f55bda51f021963754604b44_1920_KR.jpg');
+		    min-height: 100%;
+		    background-position: center;
+		    background-size: cover;
+		}
+		</style>
+
+		<style>
+	        ul {
+	            list-style-type: none;
+	            margin: 0;
+	            padding: 0;
+	            overflow: hidden;
+	            background-color: #333;
+	        }
+
+	        li {
+	            float: left;
+	            border-right:1px solid #bbb;
+	        }
+
+	        li:last-child {
+	            border-right: none;
+	        }
+
+	        li a {
+	            display: block;
+	            color: white;
+	            text-align: center;
+	            padding: 14px 16px;
+	            text-decoration: none;
+	        }
+
+	        li a:hover:not(.active) {
+	            background-color: #111;
+	        }
+
+	        .active {
+	            background-color: #4CAF50;
+	        }
+	    </style>
+
+	</head>
+	<body class="bgimg">
+
+	<ul>
+		<li><a href="{{ url_for('home') }}">Home</a></li>
+		<li><a class="active" href="#race">Race!</a></li>
+		<li><a href="{{ url_for('racingstats') }}">My Racing Stats</a></li>
+		<li><a href="#leaderboards">Leader Boards</a></li>
+		<li style="float:right"><a href="#logout">Log Out</a></li>
+	</ul>
+
+
+		<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+
+			<div class="w3-display-topmiddle" style="padding-top:50px;">
+			    <h1 class="w3-jumbo w3-animate-top">Here we go!</h1>
+			    <hr class="w3-border-grey" style="margin:auto;width:40%">
+			    <p class="w3-large w3-center">You've got 60 seconds to beat the competition!</p>
+
+				<input style="padding-left:119px;" class="w3-btn w3-center w3-large" id="start_timer" onclick="start()" type="button" value="Click here to race!"/>
+				<br>
+				<input class="w3-large w3-center" id="play_box" type="text" style="padding-left:190px;"/>
+
+			</div>
+
+			<p id="timer" class="w3-display-topright" style="padding-right:230px; font-size:140px;"></p>
+			<p id="timer2" class="w3-display-topright" style="padding-right:170px; font-size:50px; padding-top:164px;"></p>
+
+			<div id="myDIV" class="w3-text-white">
+			</div>
+
+		</div>
+	  
+	</body>
+	  
+	<script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+	<script type="text/javascript">
+
+		function start() {
+
+			responsiveVoice.setDefaultVoice("US English Male");
+
+			// Update the count down every 1 second
+			var c = 60;
+			document.getElementById("timer").innerHTML = '60';
+			var x = setInterval(function() {
+			    c = c - 1;
+			    if (c > -1) {
+			    	if (c <= 10) {
+			    		document.getElementById("timer").innerHTML = c.toString();
+			    		document.getElementById("timer").style.color = "red";
+			    	}
+			    	else {
+			    		document.getElementById("timer").innerHTML = c.toString();
+			    	}
+			    }
+			}, 1000);
+
+
+			/*
+			// we want 100 milliseconds per second
+			var c2 = 99;
+			var c3 = 99 * 60;
+			var y = setInterval(function() {
+				c2 = c2 - 1;
+				c3 = c3 - 1;
+				if (c3 > -1) {
+					if (c2 > -1) {
+						document.getElementById("timer2").innerHTML = c2.toString();
+					}
+					else {
+						c2 = 99;
+						document.getElementById("timer2").innerHTML = c2.toString();
+					}
+				}
+				else {
+					document.getElementById("timer2").innerHTML = '00';
+				}
+
+			}, 10);
+			*/
+
+			// Same as above but makes text go red on 10 sec or less
+			var c2 = 99;
+			var c3 = 99 * 60;
+			var y = setInterval(function() {
+				c2 = c2 - 1;
+				c3 = c3 - 1;
+				if (c3 > -1) {
+
+					if (c3 <= 99 * 9) {
+
+						if (c2 > -1) {
+							document.getElementById("timer2").innerHTML = c2.toString();
+							document.getElementById("timer2").style.color = "red";
+						}
+						else {
+							c2 = 99;
+							document.getElementById("timer2").innerHTML = c2.toString();
+							document.getElementById("timer2").style.color = "red";
+						}
+					}
+
+					else {
+						if (c2 > -1) {
+							document.getElementById("timer2").innerHTML = c2.toString();
+						}
+						else {
+							c2 = 99;
+							document.getElementById("timer2").innerHTML = c2.toString();
+						}
+					}
+
+				}
+				else {
+					document.getElementById("timer2").innerHTML = '00';
+					document.getElementById("timer2").style.color = "red";
+				}
+
+			}, 10);
+
+
+
+
+			function play_word(word) {
+			  responsiveVoice.speak(word);
+			}
+
+			var words = ['accommodate', 'accompany', 'according', 'achieve', 'aggressive', 'amateur', 'ancient', 'apparent', 'appreciate', 'attached', 'available', 'average', 'awkward', 'bargain', 'bruise', 'category', 'cemetery', 'committee', 'communicate', 'community', 'competition', 'conscience', 'conscious', 'controversy', 'convenience', 'correspond', 'criticise', 'curiosity', 'definite', 'desperate', 'determined', 'develop', 'dictionary', 'disastrous', 'embarrass', 'environment', 'equip', 'equipped', 'equipment', 'especially', 'exaggerate', 'excellent', 'existence', 'explanation', 'familiar', 'foreign', 'forty', 'frequently', 'government', 'guarantee', 'harass', 'hindrance', 'identity', 'immediately', 'immediate', 'individual', 'interfere', 'interrupt', 'language', 'leisure', 'lightning', 'marvellous', 'mischievous', 'muscle', 'necessary', 'neighbour', 'nuisance', 'occupy', 'occur', 'opportunity', 'parliament', 'persuade', 'physical', 'prejudice', 'privilege', 'profession', 'programme', 'pronunciation', 'queue', 'recognise', 'recommend', 'relevant', 'restaurant', 'rhyme', 'rhythm', 'sacrifice', 'secretary', 'shoulder', 'signature', 'sincere', 'sincerely', 'soldier', 'stomach', 'sufficient', 'suggest', 'symbol', 'system', 'temperature', 'thorough', 'twelfth', 'variety', 'vegetable', 'vehicle', 'yacht'];
+
+			var random_ix = Math.floor(Math.random() * words.length);
+			var sys_word = words[random_ix];
+			
+			// Go!
+			play_word(sys_word);
+			var timerRunning = true;
+			var correct_answers = 0;
+			var answer_times = [];
+			var question_t0 = Date.now()/ 1000.0;
+
+			function thing() {
+			  
+			  // hook into the play_box
+			  var play_box = document.getElementById('play_box').value;
+			  console.log(play_box);
+
+			  if (play_box == sys_word) {
+			    correct_answers += 1;
+			    diff = (Date.now()/ 1000.0) - question_t0;
+			    answer_times.push([sys_word, diff])
+			    console.log(answer_times);
+			    question_t0 = Date.now()/ 1000.0;
+
+			    // set new sys_word
+			    random_ix = Math.floor(Math.random() * words.length);
+			    sys_word = words[random_ix];
+
+			    // say it
+			    play_word(sys_word);
+
+			    // wipe play_box
+			    document.getElementById('play_box').value = '';
+
+			  }
+			}
+
+
+			function pseudoLoopOnTimer() {
+			    setTimeout(function() {
+			        if (timerRunning) {
+			            // If the time is still 'running', we execute the thing and then recursively call this function after a 0.1 second delay
+			            thing();
+			            pseudoLoopOnTimer();
+			        }
+			        else {
+			          
+						// correct answers stats
+						console.log(correct_answers);
+						var correct = correct_answers.toString();
+						var para = document.createElement("P");
+						var t = document.createTextNode("Number of words answered correctly: " + correct);
+						para.appendChild(t);
+						document.getElementById("myDIV").appendChild(para);
+
+						var br = document.createElement("BR");
+						document.getElementById("myDIV").appendChild(br);
+
+						// average time per answer
+						console.log(answer_times);
+						var sum = 0;
+						for ( var i = 0; i < answer_times.length; i++ ) {
+							sum += answer_times[i][1];
+						}
+						var avg_time_per_ans = (sum / answer_times.length);
+						var avg_time = avg_time_per_ans.toString().slice(0,4);
+
+						var para = document.createElement("P");
+						var t = document.createTextNode("Average time to answer: " + avg_time + " seconds");
+						para.appendChild(t);
+						document.getElementById("myDIV").appendChild(para);
+
+						var br = document.createElement("BR");
+						document.getElementById("myDIV").appendChild(br);
+
+						// fastest to slowest word table
+						var answer_times_sorted = answer_times;
+						answer_times_sorted.sort(function(a, b) {
+						    return a[1] - b[1];
+						});
+						var para = document.createElement("P");
+						var t = document.createTextNode("Answers from fastest to slowest:");
+						para.appendChild(t);
+						document.getElementById("myDIV").appendChild(para);
+
+						var para = document.createElement("P");
+						for ( var i = 0; i < answer_times_sorted.length; i++ ) {
+
+							var t = document.createTextNode(answer_times_sorted[i][0] + '        ' + answer_times_sorted[i][1].toString().slice(0,4));
+							para.appendChild(t);
+							para.appendChild(document.createElement("br"));
+						}
+						document.getElementById("myDIV").appendChild(para);
+
+			        }
+			    }, 100);
+			}
+
+
+			setTimeout(function() {
+			  // After a 60 second delay I am going to switch this variable off to 'turn off' the timer
+			  timerRunning = false;
+			}, 60000);
+
+			// Execute the function the first time
+			pseudoLoopOnTimer();
+			  
+		}
+
+	</script>
+</html>
